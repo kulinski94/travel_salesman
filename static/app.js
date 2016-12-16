@@ -6,33 +6,62 @@ new Vue({
     mounted: function () {
         // When the application loads, we want to call the method that initializes
         // some data
-        this.getQuestions();
+        this.getCities();
     },
     data: {
-        questions: [],
-        picked: ""
+        cities: []
     },
     methods: {
-        getQuestions: function () {
-            this.$http.get('api/question').then((response) => {
-                this.questions = JSON.parse(JSON.stringify(response.body));
+        getCities: function () {
+            this.$http.get('api/cities').then((response) => {
+                this.cities = JSON.parse(JSON.stringify(response.body));
             }, (error) => {
                 console.error(error);
             });
         },
-        deleteQuestion: function(id) {
-            this.$http.delete('api/question/' + id).then((response) => {
-                console.log(response);
-            }, (error) => {
-                console.error(error);
+        findPath: function () {
+
+            var elem = document.getElementById('map');
+            var ctx = elem.getContext('2d');
+            var height = elem.height;
+            var width = elem.width;
+
+            console.log(this.cities);
+            this.cities.forEach(function (city) {
+                ctx.fillStyle = "#FF0000";
+                ctx.beginPath();
+                ctx.arc(city.xCord, city.yCord, 3, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fill();
             });
-        },
-        saveToPdf: function () {
-            this.$http.get('api/quiz/pdf').then((response) => {
-                console.log(response);
-            }, (error) => {
-                console.error(error);
-            });
+
+            ctx.strokeStyle = "#80D080";
+            ctx.beginPath();
+            // move to first node
+            var n = this.cities[0];
+            ctx.moveTo(n.xCord, n.yCord);
+
+            for (var i = 0; i < this.cities.length; i++) {
+                var city = this.cities[i];
+                // // each node as a small dot
+                var centerX = city.xCord;
+                var centerY = height - city.yCord;
+                ctx.fillStyle = "#208020";
+                ctx.fillRect(centerX, centerY, 1, 1);
+                // draw a line to the next node
+                var nextCity;
+                if (i + 1 == this.cities.length) {
+                    nextCity = this.cities[0];
+                }else{
+                    nextCity = this.cities[i + 1];
+                }
+                
+                ctx.lineTo(nextCity.xCord, nextCity.yCord);
+            }
+            // draw all lines
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.closePath();
         }
     }
 });

@@ -17,25 +17,7 @@ var routes = Routes{
 	Route{
 		"Index",
 		"Get",
-		"/api/question",
-		getAllQuestions,
-	},
-	Route{
-		"TodoIndex",
-		"POST",
-		"/api/question",
-		addQuestion,
-	},
-	Route{
-		"TodoShow",
-		"DELETE",
-		"/api/question/{questionId}",
-		deleteQuestion,
-	},
-	Route{
-		"Save pdf",
-		"GET",
-		"/api/quiz/pdf",
-		savePdf,
+		"/api/cities",
+		getAllCities,
 	},
 }
