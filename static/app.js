@@ -9,12 +9,15 @@ new Vue({
         this.getCities();
     },
     data: {
-        cities: []
+        cities: [],
+        distance: 0,
     },
     methods: {
         getCities: function () {
             this.$http.get('api/cities').then((response) => {
-                this.cities = JSON.parse(JSON.stringify(response.body));
+                this.cities = JSON.parse(JSON.stringify(response.body.paths));
+                this.distance = JSON.parse(JSON.stringify(response.body.distance));
+                this.findPath()
             }, (error) => {
                 console.error(error);
             });

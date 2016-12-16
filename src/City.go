@@ -6,4 +6,9 @@ type City struct {
 	YCord int    `json:"yCord"`
 }
 
+type RestResponse struct {
+	Paths    Cities  `json:"paths"`
+	Distance float64 `json:"distance"`
+}
+
 type Cities []City
