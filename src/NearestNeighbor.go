@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 
 	"github.com/bradhe/stopwatch"
 )
@@ -28,7 +27,7 @@ func RunNearestNeighbor(originalCities Cities) (Cities, float64, uint32) {
 			closestDistance := float64(1000000)
 
 			for j, secondCity := range leftCities {
-				dist := calcDistanceBeetweenDots(currentCity, secondCity)
+				dist := CalculateTravelCostsBetweenCities(currentCity, secondCity)
 				fmt.Println("distance closest", dist, closestDistance)
 				if dist < closestDistance {
 					closestDistance = dist
@@ -53,19 +52,12 @@ func calcPath(cities Cities) float64 {
 	distance := float64(0)
 	for i := 0; i < len(cities); i++ {
 		if i == len(cities)-1 {
-			distance += calcDistanceBeetweenDots(cities[i], cities[0])
+			distance += CalculateTravelCostsBetweenCities(cities[i], cities[0])
 		} else {
-			distance += calcDistanceBeetweenDots(cities[i], cities[i+1])
+			distance += CalculateTravelCostsBetweenCities(cities[i], cities[i+1])
 		}
 	}
 	fmt.Println("distance: ", distance)
-	return distance
-}
-
-func calcDistanceBeetweenDots(a, b City) float64 {
-	first := math.Pow(float64(b.XCord)-float64(a.XCord), 2)
-	second := math.Pow(float64(b.YCord)-float64(a.YCord), 2)
-	distance := math.Sqrt(first + second)
 	return distance
 }
 

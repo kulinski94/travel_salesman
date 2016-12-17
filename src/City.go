@@ -1,5 +1,7 @@
 package main
 
+import "math"
+
 // City - keep coordinates of city
 type City struct {
 	Name  string `json:"name"`
@@ -22,3 +24,10 @@ type RestRequest struct {
 
 //Cities - array of City object
 type Cities []City
+
+//CalculateTravelCostsBetweenCities - distance between two cities
+func CalculateTravelCostsBetweenCities(a, b City) float64 {
+	dx := a.XCord - b.XCord
+	dy := a.YCord - b.YCord
+	return math.Sqrt(float64(dx*dx) + float64(dy*dy))
+}
