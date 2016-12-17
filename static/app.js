@@ -8,6 +8,7 @@ new Vue({
     data: {
         cities: [],
         distance: 0,
+        msTime: 0,
         count: 5,
     },
     methods: {
@@ -15,6 +16,7 @@ new Vue({
             this.$http.post('api/path', this.cities).then((response) => {
                 var paths = JSON.parse(JSON.stringify(response.body.paths));
                 this.distance = JSON.parse(JSON.stringify(response.body.distance));
+                this.msTime = JSON.parse(JSON.stringify(response.body.timeTaken));
                 this.drawPath(paths);
             }, (error) => {
                 console.error(error);

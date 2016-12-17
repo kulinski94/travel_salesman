@@ -4,6 +4,7 @@ import (
 	"net/http"
 )
 
+// Route - endpoint structure
 type Route struct {
 	Name        string
 	Method      string
@@ -11,6 +12,7 @@ type Route struct {
 	HandlerFunc http.HandlerFunc
 }
 
+// Routes - list of Routre endpoint structure
 type Routes []Route
 
 var routes = Routes{

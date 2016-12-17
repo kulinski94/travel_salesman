@@ -11,6 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//GenerateCities generate randomly coordinates of n cities
 func GenerateCities(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
@@ -29,6 +30,8 @@ func GenerateCities(w http.ResponseWriter, r *http.Request) {
 		i++
 	}
 
+	RunBruteForce(cities)
+
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
@@ -37,6 +40,7 @@ func GenerateCities(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//FindPath - based on RestRequest find best pathfunc FindPath(w http.ResponseWriter, r *http.Request) {
 func FindPath(w http.ResponseWriter, r *http.Request) {
 
 	var originalCities Cities
@@ -54,9 +58,9 @@ func FindPath(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	cities, distance := ClosestCityAlgorithm(originalCities)
+	cities, distance, timeTaken := ClosestCityAlgorithm(originalCities)
 
-	restResponse := RestResponse{Paths: cities, Distance: distance}
+	restResponse := RestResponse{Paths: cities, Distance: distance, TimeTaken: timeTaken}
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Status", "200")

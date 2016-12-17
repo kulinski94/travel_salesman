@@ -24,16 +24,34 @@
 	<div class="container" id="app">
 
 		<div class="row">
-			<canvas id="map" width="540" height="480" style="float:left; border: 1px solid silver; background: url(http://johannes-beck.name/images/grid-20-20.png) top left; display: block; margin-left: 150px;"></canvas>
+			<div class="col-sm-6">
+				<canvas id="map" width="540" height="480" style="float:left; border: 1px solid silver; background: url(http://johannes-beck.name/images/grid-20-20.png) top left; display: block;"></canvas>
 				<!-- text -->
-				<label>Count:</label>
-				<input type="number" v-model="count">
-				<button class="btn btn-primary" v-on:click="getCities">Generate Cities</button>
-
-				<button class="btn btn-primary" v-on:click="getPath">Calculate Path</button>
-
-			<label>Distance: {{distance}}</label>
-
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Count:</label>
+					<input type="number" v-model="count">
+					<button class="btn btn-primary" v-on:click="getCities">Generate Cities</button>
+				</div>
+				<div class="form-group">
+					<input name="algorithm" type="radio" value="BruteForce">
+					<label>BruteForce</label>
+				</div>
+				<div class="form-group">
+					<input name="algorithm" type="radio" v-bind:value="NearestNeighbor">
+					<label>Nearest-Neighbor</label>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" v-on:click="getPath">Calculate Path</button>
+				</div>
+				<div class="form-group">
+					<label>Distance: {{distance}} km</label>
+				</div>
+				<div class="form-group">
+					<label>Time: {{msTime}} ms</label>
+				</div>
+			</div>
 		</div>
 
 		<!-- JS -->
