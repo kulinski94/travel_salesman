@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"math/rand"
@@ -30,8 +31,6 @@ func GenerateCities(w http.ResponseWriter, r *http.Request) {
 		i++
 	}
 
-	RunBruteForce(cities)
-
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
@@ -42,6 +41,9 @@ func GenerateCities(w http.ResponseWriter, r *http.Request) {
 
 //FindPath - based on RestRequest find best pathfunc FindPath(w http.ResponseWriter, r *http.Request) {
 func FindPath(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	algorithm, _ := vars["algorithm"]
 
 	var originalCities Cities
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
@@ -57,8 +59,16 @@ func FindPath(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 	}
+	var cities Cities
+	var distance float64
+	var timeTaken uint32
 
-	cities, distance, timeTaken := ClosestCityAlgorithm(originalCities)
+	fmt.Println("alg", algorithm)
+	if algorithm == "BruteForce" && len(originalCities) < 10 {
+		cities, distance, timeTaken = RunBruteForce(originalCities)
+	} else if algorithm == "NearestNeighbor" {
+		cities, distance, timeTaken = RunNearestNeighbor(originalCities)
+	}
 
 	restResponse := RestResponse{Paths: cities, Distance: distance, TimeTaken: timeTaken}
 

@@ -7,8 +7,8 @@ import (
 	"github.com/bradhe/stopwatch"
 )
 
-// ClosestCityAlgorithm - start from one city and go to closest one
-func ClosestCityAlgorithm(originalCities Cities) (Cities, float64, uint32) {
+// RunNearestNeighbor - start from one city and go to closest one
+func RunNearestNeighbor(originalCities Cities) (Cities, float64, uint32) {
 	start := stopwatch.Start()
 
 	leftCities := originalCities

@@ -10,10 +10,11 @@ new Vue({
         distance: 0,
         msTime: 0,
         count: 5,
+        algorithm: "BruteForce"
     },
     methods: {
         getPath: function () {
-            this.$http.post('api/path', this.cities).then((response) => {
+            this.$http.post(`api/path/${this.algorithm}`, this.cities).then((response) => {
                 var paths = JSON.parse(JSON.stringify(response.body.paths));
                 this.distance = JSON.parse(JSON.stringify(response.body.distance));
                 this.msTime = JSON.parse(JSON.stringify(response.body.timeTaken));

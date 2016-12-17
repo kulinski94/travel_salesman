@@ -25,7 +25,7 @@ var routes = Routes{
 	Route{
 		"Path",
 		"POST",
-		"/api/path",
+		"/api/path/{algorithm}",
 		FindPath,
 	},
 }

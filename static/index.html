@@ -35,11 +35,11 @@
 					<button class="btn btn-primary" v-on:click="getCities">Generate Cities</button>
 				</div>
 				<div class="form-group">
-					<input name="algorithm" type="radio" value="BruteForce">
+					<input name="algorithm" type="radio" value="BruteForce" v-model="algorithm">
 					<label>BruteForce</label>
 				</div>
 				<div class="form-group">
-					<input name="algorithm" type="radio" v-bind:value="NearestNeighbor">
+					<input name="algorithm" type="radio" value="NearestNeighbor" v-model="algorithm">
 					<label>Nearest-Neighbor</label>
 				</div>
 				<div class="form-group">

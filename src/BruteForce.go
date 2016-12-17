@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"math"
+
+	"github.com/bradhe/stopwatch"
 )
 
 type costs [][]float64
 
 // RunBruteForce - calculate all paths costa and select the best
-func RunBruteForce(originalCities Cities) (Cities, float64) {
+func RunBruteForce(originalCities Cities) (Cities, float64, uint32) {
+	start := stopwatch.Start()
 
 	var minRoute Cities
 
@@ -17,7 +20,11 @@ func RunBruteForce(originalCities Cities) (Cities, float64) {
 	initDistanceByCoordinates(originalCities)
 
 	fmt.Println("Results:", minRoute, minCosts)
-	return minRoute, minCosts
+	watch := stopwatch.Stop(start)
+
+	fmt.Printf("Milliseconds elapsed: %v\n", watch.Milliseconds())
+
+	return originalCities, minCosts, watch.Milliseconds()
 }
 
 func initDistanceByCoordinates(cities Cities) costs {
