@@ -11,7 +11,7 @@ import (
 func main() {
 	var dir string
 
-	flag.StringVar(&dir, "dir", "../static", "the directory to serve files from. Defaults to the current dir")
+	flag.StringVar(&dir, "dir", "static", "the directory to serve files from. Defaults to the current dir")
 	flag.Parse()
 
 	router := NewRouter()
