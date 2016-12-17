@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"strconv"
 
@@ -19,7 +20,14 @@ func GenerateCities(w http.ResponseWriter, r *http.Request) {
 		panic(er)
 	}
 
-	cities := generateCities(count)
+	var cities Cities
+	weight := 540
+	height := 480
+	i := 0
+	for i < count {
+		cities = append(cities, City{XCord: rand.Intn(weight), YCord: rand.Intn(height)})
+		i++
+	}
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)

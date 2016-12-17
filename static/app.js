@@ -23,21 +23,25 @@ new Vue({
         getCities: function () {
             this.$http.get(`api/cities/${this.count}`).then((response) => {
                 this.cities = JSON.parse(JSON.stringify(response.body));
-                this.drawCities()
+                this.drawCities(this.cities)
             }, (error) => {
                 console.error(error);
             });
         },
-        drawCities: function () {
+        drawCities: function (cities) {
             var elem = document.getElementById('map');
             var ctx = elem.getContext('2d');
             var height = elem.height;
             var width = elem.width;
             ctx.clearRect(0, 0, elem.width, elem.height)
 
-            console.log(this.cities);
-            this.cities.forEach(function (city) {
-                ctx.fillStyle = "#FF0000";
+            console.log(cities);
+            cities.forEach(function (city, i) {
+
+                if (i == 0)
+                    ctx.fillStyle = "#250000";
+                else
+                    ctx.fillStyle = "#FF0000";
                 ctx.beginPath();
                 ctx.arc(city.xCord, city.yCord, 3, 0, Math.PI * 2, true);
                 ctx.closePath();
@@ -49,6 +53,8 @@ new Vue({
             var ctx = elem.getContext('2d');
             var height = elem.height;
             var width = elem.width;
+
+            this.drawCities(paths);
 
             ctx.strokeStyle = "#80D080";
             ctx.beginPath();
