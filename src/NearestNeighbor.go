@@ -16,7 +16,6 @@ func RunNearestNeighbor(originalCities Cities) (Cities, float64, uint32) {
 
 	for i := 0; i < len(originalCities); i++ {
 
-		fmt.Println("left", leftCities)
 		if i == 0 {
 			bestOrder = append(bestOrder, leftCities[0])
 			leftCities = removeIndex(leftCities, 0)
@@ -28,11 +27,9 @@ func RunNearestNeighbor(originalCities Cities) (Cities, float64, uint32) {
 
 			for j, secondCity := range leftCities {
 				dist := CalculateTravelCostsBetweenCities(currentCity, secondCity)
-				fmt.Println("distance closest", dist, closestDistance)
 				if dist < closestDistance {
 					closestDistance = dist
 					closestCityIndex = j
-					fmt.Println("distance closest", dist, closestDistance, closestCityIndex)
 				}
 			}
 			bestOrder = append(bestOrder, leftCities[closestCityIndex])
@@ -43,8 +40,6 @@ func RunNearestNeighbor(originalCities Cities) (Cities, float64, uint32) {
 	distance := calcPath(bestOrder)
 
 	watch := stopwatch.Stop(start)
-	fmt.Printf("Milliseconds elapsed: %v\n", watch.Milliseconds())
-
 	return bestOrder, distance, watch.Milliseconds()
 }
 

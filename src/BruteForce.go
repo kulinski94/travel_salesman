@@ -54,8 +54,6 @@ func RunBruteForce(originalCities Cities) (Cities, float64, uint32) {
 func checkRoute(route []int, offset int, count int) {
 	if offset == count {
 		count++
-		fmt.Println("count", count)
-
 		cost := calculateCost(route)
 		if minCosts < 0 || cost < minCosts {
 			minCosts = cost
@@ -91,7 +89,6 @@ func calculateCost(route []int) float64 {
 	//return to starting city
 	cost += travelCosts[route[len(route)-1]][route[0]]
 
-	fmt.Println("Route cost", route, cost)
 	return cost
 }
 
@@ -100,10 +97,8 @@ func initDistanceByCoordinates(cities Cities) costs {
 	costs := initCostsMatrix(cities)
 
 	for i := 0; i < len(cities); i++ {
-		fmt.Println("Row")
 		for j := 0; j < len(cities); j++ {
 			costs[i][j] = CalculateTravelCostsBetweenCities(cities[i], cities[j])
-			fmt.Print(" ", costs[i][j])
 		}
 	}
 	return costs
