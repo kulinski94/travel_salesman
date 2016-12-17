@@ -2,16 +2,18 @@
 
 Course project for TU-Sofia
 
-What can project do?
-Server: Using Go
-1.Generating Points in 2D system.
-2.Calculate best path using BruteForce or NearestNeighbor algorithms 
-UI: Using VueJS
-1.Visualize points and path in html5 canvas
+ - Server: Using Go
+  - Generating Points in 2D system.
+  - Calculate best path using BruteForce or NearestNeighbor algorithms 
 
-=== Build && Run ===
-Build And Run the Server:
-go build src/* && ./BruteForce 
+ - UI: Using VueJS
+  - Visualize points and path in html5 canvas
 
-Open UI
-http://localhost:8080
+- Build And Run the Server:
+ - go build src/* && ./BruteForce 
+ - http://localhost:8080
+
+
+![alt tag](images/BruteForce.png)
+
+![alt tag](images/Nearest.png)
