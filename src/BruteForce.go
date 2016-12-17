@@ -51,8 +51,8 @@ func RunBruteForce(originalCities Cities) (Cities, float64, uint32) {
 	return optimalPath, minCosts, watch.Milliseconds()
 }
 
-func checkRoute(route []int, offset int, len int) {
-	if offset == len {
+func checkRoute(route []int, offset int, count int) {
+	if offset == count {
 		count++
 		fmt.Println("count", count)
 
@@ -66,25 +66,32 @@ func checkRoute(route []int, offset int, len int) {
 	}
 
 loop:
-	for i := 1; i < len; i++ {
+	for i := 1; i < count; i++ {
 		for j := 0; j < offset; j++ {
 			if route[j] == i {
 				continue loop
 			}
 		}
 
-		route = append(route, i)
-		checkRoute(route, offset+1, len)
+		if len(route)-1 < offset {
+			route = append(route, i)
+		} else {
+			route[offset] = i
+		}
+		checkRoute(route, offset+1, count)
 	}
 }
 
 func calculateCost(route []int) float64 {
 	cost := float64(0)
+
 	for i := 1; i < len(route); i++ {
 		cost += travelCosts[route[i-1]][route[i]]
 	}
 	//return to starting city
 	cost += travelCosts[route[len(route)-1]][route[0]]
+
+	fmt.Println("Route cost", route, cost)
 	return cost
 }
 
