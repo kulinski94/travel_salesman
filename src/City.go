@@ -11,4 +11,9 @@ type RestResponse struct {
 	Distance float64 `json:"distance"`
 }
 
+type RestRequest struct {
+	Cities    Cities `json:"cities"`
+	Algorithm string `json:"algorithm"`
+}
+
 type Cities []City

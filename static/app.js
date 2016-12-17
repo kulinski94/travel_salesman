@@ -4,30 +4,36 @@ new Vue({
     // We want to target the div with an id of 'events'
     el: '#app',
     mounted: function () {
-        // When the application loads, we want to call the method that initializes
-        // some data
-        this.getCities();
     },
     data: {
         cities: [],
         distance: 0,
+        count: 5,
     },
     methods: {
-        getCities: function () {
-            this.$http.get('api/cities').then((response) => {
-                this.cities = JSON.parse(JSON.stringify(response.body.paths));
+        getPath: function () {
+            this.$http.post('api/path', this.cities).then((response) => {
+                var paths = JSON.parse(JSON.stringify(response.body.paths));
                 this.distance = JSON.parse(JSON.stringify(response.body.distance));
-                this.findPath()
+                this.drawPath(paths);
             }, (error) => {
                 console.error(error);
             });
         },
-        findPath: function () {
-
+        getCities: function () {
+            this.$http.get(`api/cities/${this.count}`).then((response) => {
+                this.cities = JSON.parse(JSON.stringify(response.body));
+                this.drawCities()
+            }, (error) => {
+                console.error(error);
+            });
+        },
+        drawCities: function () {
             var elem = document.getElementById('map');
             var ctx = elem.getContext('2d');
             var height = elem.height;
             var width = elem.width;
+            ctx.clearRect(0, 0, elem.width, elem.height)
 
             console.log(this.cities);
             this.cities.forEach(function (city) {
@@ -37,28 +43,34 @@ new Vue({
                 ctx.closePath();
                 ctx.fill();
             });
+        },
+        drawPath: function (paths) {
+            var elem = document.getElementById('map');
+            var ctx = elem.getContext('2d');
+            var height = elem.height;
+            var width = elem.width;
 
             ctx.strokeStyle = "#80D080";
             ctx.beginPath();
             // move to first node
-            var n = this.cities[0];
+            var n = paths[0];
             ctx.moveTo(n.xCord, n.yCord);
 
-            for (var i = 0; i < this.cities.length; i++) {
-                var city = this.cities[i];
+            for (var i = 0; i < paths.length; i++) {
+                var city = paths[i];
                 // // each node as a small dot
                 var centerX = city.xCord;
                 var centerY = height - city.yCord;
-                ctx.fillStyle = "#208020";
+                ctx.fillStyle = "#308020";
                 ctx.fillRect(centerX, centerY, 1, 1);
                 // draw a line to the next node
                 var nextCity;
-                if (i + 1 == this.cities.length) {
-                    nextCity = this.cities[0];
-                }else{
-                    nextCity = this.cities[i + 1];
+                if (i + 1 == paths.length) {
+                    nextCity = paths[0];
+                } else {
+                    nextCity = paths[i + 1];
                 }
-                
+
                 ctx.lineTo(nextCity.xCord, nextCity.yCord);
             }
             // draw all lines

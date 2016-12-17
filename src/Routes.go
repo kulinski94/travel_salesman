@@ -17,7 +17,13 @@ var routes = Routes{
 	Route{
 		"Index",
 		"Get",
-		"/api/cities",
-		getAllCities,
+		"/api/cities/{count}",
+		GenerateCities,
+	},
+	Route{
+		"Path",
+		"POST",
+		"/api/path",
+		FindPath,
 	},
 }

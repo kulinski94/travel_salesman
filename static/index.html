@@ -22,17 +22,24 @@
 
 	<!-- main body of our application -->
 	<div class="container" id="app">
-		<canvas id="map" width="540" height="480" style="float:left; border: 1px solid silver; background: url(http://johannes-beck.name/images/grid-20-20.png) top left; display: block; margin-left: 20px;"></canvas>
 
-		<button type="submit" class="glyphicon glyphicon glyphicon-save" v-on:click="findPath">findPath</button>
-		Distance: {{ distance }}
-		
-	</div>
+		<div class="row">
+			<canvas id="map" width="540" height="480" style="float:left; border: 1px solid silver; background: url(http://johannes-beck.name/images/grid-20-20.png) top left; display: block; margin-left: 150px;"></canvas>
+				<!-- text -->
+				<label>Count:</label>
+				<input type="number" v-model="count">
+				<button class="btn btn-primary" v-on:click="getCities">Generate Cities</button>
 
-	<!-- JS -->
-	<script src="https://unpkg.com/vue@next/dist/vue.js"></script>
-	<script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
-	<script src="app.js"></script>
+				<button class="btn btn-primary" v-on:click="getPath">Calculate Path</button>
+
+			<label>Distance: {{distance}}</label>
+
+		</div>
+
+		<!-- JS -->
+		<script src="https://unpkg.com/vue@next/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+		<script src="app.js"></script>
 </body>
 
 </html>
