@@ -64,7 +64,7 @@ func FindPath(w http.ResponseWriter, r *http.Request) {
 	var timeTaken uint32
 
 	fmt.Println("alg", algorithm)
-	if algorithm == "BruteForce" && len(originalCities) < 10 {
+	if algorithm == "BruteForce" && len(originalCities) < 14 {
 		cities, distance, timeTaken = RunBruteForce(originalCities)
 	} else if algorithm == "NearestNeighbor" {
 		cities, distance, timeTaken = RunNearestNeighbor(originalCities)
