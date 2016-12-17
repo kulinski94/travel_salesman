@@ -11,8 +11,6 @@ Course project for TU-Sofia
 
 === Build && Run ===
 
-Go to src folder:
-
 Run the server:
 go build src/* && ./BruteForce 
 
