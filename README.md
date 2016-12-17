@@ -1,5 +1,20 @@
-# travel_salesman
+# Travelling Salesman Problem 
+
+Written in GOLANG
 
 Course project for TU-Sofia
 
-Program to solve Travelling salesman problem 
+1.Generating Points in visualised in html5 canvas
+
+2. Calculate best path using BruteForce or NearestNeighbor algorithms 
+
+
+=== Build && Run ===
+
+Go to src folder:
+
+Run the server:
+go build src/* && ./BruteForce 
+
+Open UI
+http://localhost:8080
