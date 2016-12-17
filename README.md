@@ -1,17 +1,16 @@
 # Travelling Salesman Problem 
 
-Written in GOLANG
-
 Course project for TU-Sofia
 
-1.Generating Points in visualised in html5 canvas
-
-2. Calculate best path using BruteForce or NearestNeighbor algorithms 
-
+What can project do?
+Server: Using Go
+1.Generating Points in 2D system.
+2.Calculate best path using BruteForce or NearestNeighbor algorithms 
+UI: Using VueJS
+1.Visualize points and path in html5 canvas
 
 === Build && Run ===
-
-Run the server:
+Build And Run the Server:
 go build src/* && ./BruteForce 
 
 Open UI
